@@ -37,6 +37,10 @@ Plugin 'Quramy/vim-dtsm'
 Plugin 'mhartington/vim-typings'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'wincent/command-t'
+Plugin 'easymotion/vim-easymotion'
+Plugin 'haya14busa/incsearch.vim'
+Plugin 'haya14busa/incsearch-easymotion.vim'
+Plugin 'haya14busa/incsearch-fuzzy.vim'
 "
 " " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -55,8 +59,6 @@ filetype plugin on
 " " see :h vundle for more details or wiki for FAQ
 " " Put your non-Plugin stuff after this line
 set autoindent
-set expandtab
-set shiftwidth=2
 set softtabstop=2
 set smartcase
 set ic
@@ -65,10 +67,47 @@ nnoremap / /\c
 
 let g:CommandTFileScanner='git'
 
-:map <M-n> noh
+execute "set <M-c>=\ec"
+execute "set <M-n>=\en"
+:map <M-n> :noh<CR>
+:map <M-c> :NERDTree<CR>
 :map [ <C-f>
 :map ] <C-b>
 :map <CR> yyp
+:map <space> ciw
+:map e A
 :nmap ( :CommandT<CR>
 noremap <C-j> <C-w>l
 noremap <C-k> <C-w>h
+" <Leader>f{char} to move to {char}
+map  <Leader>f <Plug>(easymotion-bd-f)
+nmap <Leader>f <Plug>(easymotion-overwin-f)
+
+" s{char}{char} to move to {char}{char}
+nmap s <Plug>(easymotion-overwin-f2)
+
+" Move to line
+map <Leader>L <Plug>(easymotion-bd-jk)
+nmap <Leader>L <Plug>(easymotion-overwin-line)
+
+" Move to word
+map  <Leader>w <Plug>(easymotion-bd-w)
+nmap <Leader>w <Plug>(easymotion-overwin-w)
+
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
+
+" :h g:incsearch#auto_nohlsearch
+set hlsearch
+let g:incsearch#auto_nohlsearch = 1
+map n  <Plug>(incsearch-nohl-n)
+map N  <Plug>(incsearch-nohl-N)
+map *  <Plug>(incsearch-nohl-*)
+map #  <Plug>(incsearch-nohl-#)
+map g* <Plug>(incsearch-nohl-g*)
+map g# <Plug>(incsearch-nohl-g#)
+
+noremap <silent><expr> /  incsearch#go(<SID>incsearch_config())
+noremap <silent><expr> ?  incsearch#go(<SID>incsearch_config({'command': '?'}))
+noremap <silent><expr> g/ incsearch#go(<SID>incsearch_config({'is_stay':1}))

@@ -100,6 +100,7 @@ alias t="typings"
 alias nrd="npm run dev"
 alias c="git commit -am"
 alias groot='cd $(git rev-parse --show-cdup)'
+alias as='sudo !!'
 
 mm() {
   mk $1 && cd $1
@@ -126,7 +127,7 @@ export NVM_DIR="/home/naoric/.nvm"
 # uninstall by removing these lines or running `tabtab uninstall yo`
 [[ -f /home/naoric/.nvm/versions/node/v6.1.0/lib/node_modules/yo/node_modules/tabtab/.completions/yo.zsh ]] && . /home/naoric/.nvm/versions/node/v6.1.0/lib/node_modules/yo/node_modules/tabtab/.completions/yo.zsh
 
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+export PATH="$PATH:$HOME/.rvm/bin:/usr/pgsql-9.3/bin" # Add RVM to PATH for scripting
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
